@@ -1,10 +1,6 @@
-import {View, Text} from 'react-native';
 import React from 'react';
+import MainNavigationRoutes from './src/Routes/MainNavigationRoutes';
 
 export default function App() {
-  return (
-    <View>
-      <Text>App</Text>
-    </View>
-  );
+  return <MainNavigationRoutes />;
 }
