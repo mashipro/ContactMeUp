@@ -2,7 +2,7 @@ export type IContact = {
   id: string;
   firstName: string;
   lastName: string;
-  age: string;
+  age: number;
   photo: string | null;
 };
 
