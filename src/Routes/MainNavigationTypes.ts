@@ -7,6 +7,7 @@ export type IMainNavigator = {
   ContactDetailScreen: {
     contactDetail: IContact;
   };
+  EditContactScreen: undefined | {contactDetail: IContact};
 };
 
 export type IMainNavigatorPropTypes<T extends keyof IMainNavigator> =

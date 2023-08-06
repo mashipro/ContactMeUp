@@ -16,6 +16,20 @@ const ContactCardList: FC<IContactCardListProp> = prop => {
     <TouchableOpacity
       style={styles.BaseContainer}
       onPress={() => prop.onPress()}>
+      {isPhotoAvailable && (
+        <>
+          <Image
+            source={{uri: contact.photo!}}
+            style={StyleSheet.absoluteFillObject}
+          />
+          <View
+            style={[
+              StyleSheet.absoluteFill,
+              {backgroundColor: 'white', opacity: 0.8},
+            ]}
+          />
+        </>
+      )}
       <Text>{contact.firstName + ' ' + contact.lastName}</Text>
       {isPhotoAvailable ? (
         <Image source={{uri: contact.photo!}} style={styles.AvatarFrame} />

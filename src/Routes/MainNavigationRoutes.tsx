@@ -8,11 +8,12 @@ import {IMainNavigator} from './MainNavigationTypes';
 import SplashScreen from '../Screens/SplashScreen';
 import ContactListScreen from '../Screens/ContactListScreen';
 import ContactDetailScreen from '../Screens/ContactDetailScreen';
+import EditContactScreen from '../Screens/EditContactScreen';
 
 const Stack = createNativeStackNavigator<IMainNavigator>();
 
 export default function MainNavigationRoutes() {
-  const DefaultScreenOptions = {headerShown: true};
+  const DefaultScreenOptions = {headerShown: false};
 
   return (
     <SafeAreaProvider>
@@ -31,6 +32,12 @@ export default function MainNavigationRoutes() {
             name="ContactDetailScreen"
             component={ContactDetailScreen}
           />
+          <Stack.Group screenOptions={{presentation: 'modal'}}>
+            <Stack.Screen
+              name="EditContactScreen"
+              component={EditContactScreen}
+            />
+          </Stack.Group>
         </Stack.Navigator>
       </NavigationContainer>
     </SafeAreaProvider>
