@@ -4,6 +4,9 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import reducer from './Reducers/index';
 
+const createDebugger = require('redux-flipper').default;
+const createObserver = require('flipper-redux-observer').default;
+
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
@@ -21,7 +24,9 @@ const stores = configureStore({
     getDefaultMiddleware({
       serializableCheck: false,
       thunk: true,
-    }),
+    })
+      .concat(createDebugger())
+      .concat(createObserver()),
 });
 
 const persistor = persistStore(stores);
