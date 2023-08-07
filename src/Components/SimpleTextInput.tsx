@@ -12,10 +12,11 @@ const SimpleTextInput: FC<ISimpleTextInputProp> = ({
   label,
 }) => {
   return (
-    <View>
+    <View style={styles.Base}>
       <Text>{label}</Text>
-      <View style={{padding: 12, borderWidth: 1}}>
+      <View style={{padding: 8, borderWidth: 1}}>
         <TextInput
+          style={styles.Normalize}
           value={value}
           placeholder={label}
           onChangeText={onTextChange}
@@ -27,4 +28,11 @@ const SimpleTextInput: FC<ISimpleTextInputProp> = ({
 
 export default SimpleTextInput;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  Base: {marginBottom: 4},
+  Normalize: {
+    paddingVertical: 0,
+    margin: 0,
+    // backgroundColor: 'skyblue'
+  },
+});
