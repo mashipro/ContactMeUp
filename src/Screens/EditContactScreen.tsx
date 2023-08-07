@@ -44,7 +44,7 @@ const EditContactScreen: FC<IMainNavigatorPropTypes<'EditContactScreen'>> = ({
     };
     console.log('New Contact Form', newContact);
     if (isCreate) {
-      dispatch(postContact(newContact)).then((res: any) => {
+      dispatch(postContact(newContact)).then(() => {
         // await dispatch(fetchContactList());
         navigation.goBack();
       });
