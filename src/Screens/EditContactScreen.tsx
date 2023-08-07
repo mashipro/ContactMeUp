@@ -59,7 +59,7 @@ const EditContactScreen: FC<IMainNavigatorPropTypes<'EditContactScreen'>> = ({
 
   return (
     <View style={styles.Base}>
-      <View>
+      <View style={{flex: 1}}>
         <Text style={styles.Text}>
           {isCreate ? 'Create Contact' : 'Edit Contact'}
         </Text>
