@@ -7,14 +7,16 @@ const SplashScreen: FC<IMainNavigatorPropTypes<'SplashScreen'>> = ({
 }) => {
   useEffect(() => {
     setTimeout(() => {
+      // console.log('timeout');
       navigation.replace('ContactListScreen');
     }, 1000);
-    return () => {};
-  }, [navigation]);
+  }, []);
 
   return (
     <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-      <Text style={{fontSize: 80, fontWeight: 'bold'}}>Contact Me App</Text>
+      <Text testID="Titles" style={{fontSize: 80, fontWeight: 'bold'}}>
+        Contact Me App
+      </Text>
     </View>
   );
 };

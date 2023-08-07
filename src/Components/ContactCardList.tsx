@@ -14,6 +14,7 @@ const ContactCardList: FC<IContactCardListProp> = prop => {
 
   return (
     <TouchableOpacity
+      testID="contact-card"
       style={styles.BaseContainer}
       onPress={() => prop.onPress()}>
       {isPhotoAvailable && (
@@ -30,7 +31,9 @@ const ContactCardList: FC<IContactCardListProp> = prop => {
           />
         </>
       )}
-      <Text>{contact.firstName + ' ' + contact.lastName}</Text>
+      <Text testID="contact-card-name">
+        {contact.firstName + ' ' + contact.lastName}
+      </Text>
       {isPhotoAvailable ? (
         <Image source={{uri: contact.photo!}} style={styles.AvatarFrame} />
       ) : (

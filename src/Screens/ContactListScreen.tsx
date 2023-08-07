@@ -29,7 +29,7 @@ const ContactListScreen: FC<IMainNavigatorPropTypes<'ContactListScreen'>> = ({
   const onCardPress = (item: IContact) => {
     console.log('card pressed');
     dispatch(setSelectedContact(item));
-    navigation.push('ContactDetailScreen', {contactDetail: item});
+    navigation.navigate('ContactDetailScreen', {contactDetail: item});
   };
 
   const onAddContactHandler = () => {
@@ -39,7 +39,9 @@ const ContactListScreen: FC<IMainNavigatorPropTypes<'ContactListScreen'>> = ({
   return (
     <SafeAreaView style={styles.SafeArea}>
       <View style={styles.Base}>
-        <Text style={styles.Text}>My Contact</Text>
+        <Text testID="header-title" style={styles.Text}>
+          My Contact
+        </Text>
         <FlatList
           style={styles.FlatList}
           data={contactLists}
@@ -50,6 +52,7 @@ const ContactListScreen: FC<IMainNavigatorPropTypes<'ContactListScreen'>> = ({
         />
       </View>
       <SimpleButton
+        testID="footer-button"
         label="Add New Contact"
         onPress={onAddContactHandler}
         style={styles.Button}
