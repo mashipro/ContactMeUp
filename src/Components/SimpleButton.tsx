@@ -4,7 +4,6 @@ import {
   Text,
   TextStyle,
   TouchableOpacity,
-  View,
 } from 'react-native';
 import React, {FC} from 'react';
 

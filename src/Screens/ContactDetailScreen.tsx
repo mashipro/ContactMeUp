@@ -6,10 +6,7 @@ import SimpleButton from '../Components/SimpleButton';
 import {useDispatch, useSelector} from 'react-redux';
 import {deleteContact, fetchContactByID} from '../Redux/Actions';
 import {RootStateType} from '../Redux/Store';
-import {
-  clearSelectedContact,
-  setSelectedContact,
-} from '../Redux/Reducers/ContactReducer';
+import {clearSelectedContact} from '../Redux/Reducers/ContactReducer';
 
 const ContactDetailScreen: FC<
   IMainNavigatorPropTypes<'ContactDetailScreen'>
@@ -70,7 +67,7 @@ const ContactDetailScreen: FC<
             <Text>{currentContact.lastName}</Text>
             {'\n'}
             <Text style={{fontSize: 30}}>
-              {`Age: `}
+              {'Age: '}
               {currentContact.age}
             </Text>
           </Text>

@@ -6,7 +6,7 @@ import SimpleTextInput from '../Components/SimpleTextInput';
 import SimpleImagePicker from '../Components/SimpleImagePicker';
 import {IContact} from '../Types/GlobalTypes';
 import {useDispatch, useSelector} from 'react-redux';
-import {editContact, fetchContactList, postContact} from '../Redux/Actions';
+import {editContact, postContact} from '../Redux/Actions';
 import {RootStateType} from '../Redux/Store';
 
 const EditContactScreen: FC<IMainNavigatorPropTypes<'EditContactScreen'>> = ({
@@ -76,7 +76,7 @@ const EditContactScreen: FC<IMainNavigatorPropTypes<'EditContactScreen'>> = ({
         <SimpleTextInput
           label="Age"
           value={age.toString()}
-          onTextChange={t => setAge(parseInt(t))}
+          onTextChange={t => setAge(parseInt(t, 10))}
         />
         <SimpleTextInput
           label="Photo URL"

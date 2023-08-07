@@ -1,5 +1,5 @@
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import React, {FC, useEffect} from 'react';
+import React, {FC} from 'react';
 import {IContact} from '../Types/GlobalTypes';
 import {isValidURL} from '../Utilities/StringUtilities';
 
