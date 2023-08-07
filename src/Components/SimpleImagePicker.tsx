@@ -22,7 +22,7 @@ const SimpleImagePicker: FC<ISimpleImagePickerProp> = ({onImageSelected}) => {
   };
 
   return (
-    <View>
+    <View style={{flex: 1}}>
       <FlatList
         data={ImageUrlPool}
         keyExtractor={(item, index) => index.toString()}

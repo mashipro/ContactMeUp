@@ -1,5 +1,5 @@
 export type IContact = {
-  id: string;
+  id?: string | null;
   firstName: string;
   lastName: string;
   age: number;

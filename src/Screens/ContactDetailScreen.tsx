@@ -1,13 +1,38 @@
 import {View, Text, StyleSheet, Image} from 'react-native';
-import React, {FC, useState} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import {IMainNavigatorPropTypes} from '../Routes/MainNavigationTypes';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import SimpleButton from '../Components/SimpleButton';
+import {useDispatch, useSelector} from 'react-redux';
+import {deleteContact, fetchContactByID} from '../Redux/Actions';
+import {RootStateType} from '../Redux/Store';
+import {
+  clearSelectedContact,
+  setSelectedContact,
+} from '../Redux/Reducers/ContactReducer';
 
 const ContactDetailScreen: FC<
   IMainNavigatorPropTypes<'ContactDetailScreen'>
 > = ({navigation, route}) => {
   const contact = route.params.contactDetail;
+
+  const dispatch = useDispatch<any>();
+
+  const [currentContact, setCurrentContact] = useState(contact);
+  console.log('current detail', currentContact.firstName);
+
+  const selectedContact = useSelector(
+    (state: RootStateType) => state.contacts.selectedContact,
+  );
+
+  useEffect(() => {}, []);
+
+  useEffect(() => {
+    if (selectedContact === null) {
+      dispatch(fetchContactByID(contact.id!));
+    }
+    setCurrentContact(selectedContact!);
+  }, [selectedContact]);
 
   const [deleteOps, setDeleteOps] = useState(false);
 
@@ -16,18 +41,21 @@ const ContactDetailScreen: FC<
   };
   const onEditPress = () => {
     if (deleteOps) return setDeleteOps(false);
-    navigation.navigate('EditContactScreen');
+    navigation.navigate('EditContactScreen', {contactDetail: currentContact});
   };
   const onDeletePress = () => {
     if (!deleteOps) return setDeleteOps(true);
-    navigation.goBack();
+    dispatch(deleteContact(contact.id!)).then(() => {
+      navigation.goBack();
+      dispatch(clearSelectedContact());
+    });
     // setDeleteOps(true);
   };
 
   return (
     <SafeAreaView style={styles.SafeArea}>
       <Image
-        source={{uri: contact.photo!}}
+        source={{uri: currentContact.photo!}}
         style={[StyleSheet.absoluteFillObject]}
       />
       <View style={[StyleSheet.absoluteFillObject, styles.ImageOverlay]} />
@@ -37,13 +65,13 @@ const ContactDetailScreen: FC<
             <SimpleButton label="back" onPress={onBackPressHandler} />
           </View>
           <Text style={styles.HeroText}>
-            <Text>{contact.firstName}</Text>
+            <Text>{currentContact.firstName}</Text>
             {'\n'}
-            <Text>{contact.lastName}</Text>
+            <Text>{currentContact.lastName}</Text>
             {'\n'}
             <Text style={{fontSize: 30}}>
               {`Age: `}
-              {contact.age}
+              {currentContact.age}
             </Text>
           </Text>
         </View>
