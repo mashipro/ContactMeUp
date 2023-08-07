@@ -1,38 +1,59 @@
-import {View, Text, StyleSheet} from 'react-native';
-import React, {FC} from 'react';
+import {View, Text, StyleSheet, FlatList} from 'react-native';
+import React, {FC, useEffect} from 'react';
 import {IMainNavigatorPropTypes} from '../Routes/MainNavigationTypes';
 import ContactCardList from '../Components/ContactCardList';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {IContact} from '../Types/GlobalTypes';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {RootStateType} from '../Redux/Store';
-
-const DummyContact: IContact = {
-  id: 'b3abd640-c92b-11e8-b02f-cbfa15db428b',
-  firstName: 'Luke',
-  lastName: 'Skywalker',
-  age: 20,
-  photo:
-    'https://images.unsplash.com/photo-1624467906831-1f80d34ed5ff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2832&q=80',
-};
+import {fetchContactList} from '../Redux/Actions';
+import SimpleButton from '../Components/SimpleButton';
+import {useIsFocused} from '@react-navigation/native';
+import {setSelectedContact} from '../Redux/Reducers/ContactReducer';
 
 const ContactListScreen: FC<IMainNavigatorPropTypes<'ContactListScreen'>> = ({
   navigation,
 }) => {
-  const onCardPress = () => {
+  const dispatch = useDispatch<any>();
+  const contactLists = useSelector(
+    (state: RootStateType) => state.contacts.contactList,
+  );
+
+  const focus = useIsFocused();
+
+  useEffect(() => {
+    if (!focus) return;
+    dispatch(fetchContactList());
+  }, [focus]);
+
+  const onCardPress = (item: IContact) => {
     console.log('card pressed');
-    navigation.push('ContactDetailScreen', {contactDetail: DummyContact});
+    dispatch(setSelectedContact(item));
+    navigation.push('ContactDetailScreen', {contactDetail: item});
   };
 
-  const contacts = useSelector((state: RootStateType) => state.contacts);
-  console.log('contacts', contacts);
+  const onAddContactHandler = () => {
+    navigation.navigate('EditContactScreen');
+  };
 
   return (
-    <SafeAreaView style={styles.SafeArea} edges={['top']}>
+    <SafeAreaView style={styles.SafeArea}>
       <View style={styles.Base}>
-        <Text>ContactListScreen</Text>
-        <ContactCardList data={DummyContact} onPress={onCardPress} />
+        <Text style={styles.Text}>My Contact</Text>
+        <FlatList
+          style={styles.FlatList}
+          data={contactLists}
+          keyExtractor={item => item.id!}
+          renderItem={({item}) => (
+            <ContactCardList data={item} onPress={() => onCardPress(item)} />
+          )}
+        />
       </View>
+      <SimpleButton
+        label="Add New Contact"
+        onPress={onAddContactHandler}
+        style={styles.Button}
+      />
     </SafeAreaView>
   );
 };
@@ -41,10 +62,20 @@ const styles = StyleSheet.create({
   SafeArea: {
     // backgroundColor: 'tomato',
     flex: 1,
+    paddingHorizontal: 8,
   },
   Base: {
     // backgroundColor: 'skyblue',
     flex: 1,
+  },
+  FlatList: {flex: 1},
+  Button: {
+    borderColor: 'black',
+    color: 'black',
+  },
+  Text: {
+    fontSize: 36,
+    fontWeight: '700',
   },
 });
 

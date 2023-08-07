@@ -14,7 +14,7 @@ const SplashScreen: FC<IMainNavigatorPropTypes<'SplashScreen'>> = ({
 
   return (
     <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-      <Text style={{fontSize: 100, fontWeight: 'bold'}}>SplashScreen</Text>
+      <Text style={{fontSize: 80, fontWeight: 'bold'}}>Contact Me App</Text>
     </View>
   );
 };
