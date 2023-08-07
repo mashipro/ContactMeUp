@@ -6,10 +6,7 @@ import SimpleButton from '../Components/SimpleButton';
 import {useDispatch, useSelector} from 'react-redux';
 import {deleteContact, fetchContactByID} from '../Redux/Actions';
 import {RootStateType} from '../Redux/Store';
-import {
-  clearSelectedContact,
-  setSelectedContact,
-} from '../Redux/Reducers/ContactReducer';
+import {clearSelectedContact} from '../Redux/Reducers/ContactReducer';
 
 const ContactDetailScreen: FC<
   IMainNavigatorPropTypes<'ContactDetailScreen'>
@@ -24,8 +21,6 @@ const ContactDetailScreen: FC<
   const selectedContact = useSelector(
     (state: RootStateType) => state.contacts.selectedContact,
   );
-
-  useEffect(() => {}, []);
 
   useEffect(() => {
     if (selectedContact === null) {
@@ -62,17 +57,20 @@ const ContactDetailScreen: FC<
       <View style={styles.Base}>
         <View>
           <View style={{flexDirection: 'row'}}>
-            <SimpleButton label="back" onPress={onBackPressHandler} />
+            <SimpleButton
+              testID="button-back"
+              label="back"
+              onPress={onBackPressHandler}
+            />
           </View>
           <Text style={styles.HeroText}>
-            <Text>{currentContact.firstName}</Text>
+            <Text testID="user-name-first">{currentContact.firstName}</Text>
             {'\n'}
-            <Text>{currentContact.lastName}</Text>
+            <Text testID="user-name-last">{currentContact.lastName}</Text>
             {'\n'}
-            <Text style={{fontSize: 30}}>
-              {`Age: `}
-              {currentContact.age}
-            </Text>
+            <Text
+              style={{fontSize: 30}}
+              testID="user-age">{`Age: ${currentContact.age}`}</Text>
           </Text>
         </View>
         <View>
@@ -84,6 +82,7 @@ const ContactDetailScreen: FC<
           <View style={styles.ButtonGroupContainer}>
             <View style={styles.ButtonWrapperContainer}>
               <SimpleButton
+                testID="button-left"
                 label={deleteOps ? 'cancel' : 'edit'}
                 onPress={onEditPress}
               />
@@ -91,6 +90,7 @@ const ContactDetailScreen: FC<
             <View style={styles.HorizontalSpace} />
             <View style={styles.ButtonWrapperContainer}>
               <SimpleButton
+                testID="button-right"
                 label={deleteOps ? 'confirm' : 'delete'}
                 onPress={onDeletePress}
                 style={{color: 'tomato', borderColor: 'tomato'}}

@@ -4,7 +4,6 @@ import {
   Text,
   TextStyle,
   TouchableOpacity,
-  View,
 } from 'react-native';
 import React, {FC} from 'react';
 
@@ -12,15 +11,22 @@ type ISimpleButtonProp = {
   onPress: () => void;
   label: string;
   style?: StyleProp<TextStyle>;
+  testID?: string;
 };
 const SimpleButton: FC<ISimpleButtonProp> = ({
   onPress,
   label,
   style: ButtonStyle,
+  testID,
 }) => {
   return (
-    <TouchableOpacity onPress={onPress} style={styles.Touchable}>
-      <Text style={[styles.BaseButton, ButtonStyle]}>{label}</Text>
+    <TouchableOpacity
+      testID={testID}
+      onPress={onPress}
+      style={styles.Touchable}>
+      <Text testID={`${testID}-text`} style={[styles.BaseButton, ButtonStyle]}>
+        {label}
+      </Text>
     </TouchableOpacity>
   );
 };

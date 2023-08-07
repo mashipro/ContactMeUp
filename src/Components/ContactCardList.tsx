@@ -1,5 +1,5 @@
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import React, {FC, useEffect} from 'react';
+import React, {FC} from 'react';
 import {IContact} from '../Types/GlobalTypes';
 import {isValidURL} from '../Utilities/StringUtilities';
 
@@ -14,6 +14,7 @@ const ContactCardList: FC<IContactCardListProp> = prop => {
 
   return (
     <TouchableOpacity
+      testID="contact-card"
       style={styles.BaseContainer}
       onPress={() => prop.onPress()}>
       {isPhotoAvailable && (
@@ -30,7 +31,9 @@ const ContactCardList: FC<IContactCardListProp> = prop => {
           />
         </>
       )}
-      <Text>{contact.firstName + ' ' + contact.lastName}</Text>
+      <Text testID="contact-card-name">
+        {contact.firstName + ' ' + contact.lastName}
+      </Text>
       {isPhotoAvailable ? (
         <Image source={{uri: contact.photo!}} style={styles.AvatarFrame} />
       ) : (

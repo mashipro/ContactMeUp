@@ -66,7 +66,7 @@ const ContactActionReducerBuilder = (
   builder: ActionReducerMapBuilder<IContactState>,
 ) => {
   builder
-    .addCase(fetchContactList.pending, (state, action) => {
+    .addCase(fetchContactList.pending, state => {
       state.isLoading = true;
     })
     .addCase(fetchContactList.fulfilled, (state, action) => {
@@ -78,32 +78,32 @@ const ContactActionReducerBuilder = (
       state.isLoading = false;
       state.error = {isError: true, message: action.payload.message};
     })
-    .addCase(fetchContactByID.pending, (state, action) => {
+    .addCase(fetchContactByID.pending, state => {
       state.isLoading = true;
     })
-    .addCase(fetchContactByID.rejected, (state, action) => {
+    .addCase(fetchContactByID.rejected, state => {
       state.isLoading = false;
     })
     .addCase(fetchContactByID.fulfilled, (state, action) => {
       state.isLoading = false;
       state.selectedContact = action.payload.data;
     })
-    .addCase(postContact.pending, (state, action) => {
+    .addCase(postContact.pending, state => {
       state.isLoading = true;
     })
-    .addCase(postContact.rejected, (state, action) => {
+    .addCase(postContact.rejected, state => {
       state.isLoading = false;
     })
-    .addCase(postContact.fulfilled, (state, action) => {
+    .addCase(postContact.fulfilled, state => {
       state.isLoading = false;
     })
-    .addCase(deleteContact.pending, (state, action) => {
+    .addCase(deleteContact.pending, state => {
       state.isLoading = true;
     })
-    .addCase(deleteContact.rejected, (state, action) => {
+    .addCase(deleteContact.rejected, state => {
       state.isLoading = false;
     })
-    .addCase(deleteContact.fulfilled, (state, action) => {
+    .addCase(deleteContact.fulfilled, state => {
       state.isLoading = false;
     });
 };

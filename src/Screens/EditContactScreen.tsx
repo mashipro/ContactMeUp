@@ -6,7 +6,7 @@ import SimpleTextInput from '../Components/SimpleTextInput';
 import SimpleImagePicker from '../Components/SimpleImagePicker';
 import {IContact} from '../Types/GlobalTypes';
 import {useDispatch, useSelector} from 'react-redux';
-import {editContact, fetchContactList, postContact} from '../Redux/Actions';
+import {editContact, postContact} from '../Redux/Actions';
 import {RootStateType} from '../Redux/Store';
 
 const EditContactScreen: FC<IMainNavigatorPropTypes<'EditContactScreen'>> = ({
@@ -44,7 +44,7 @@ const EditContactScreen: FC<IMainNavigatorPropTypes<'EditContactScreen'>> = ({
     };
     console.log('New Contact Form', newContact);
     if (isCreate) {
-      dispatch(postContact(newContact)).then((res: any) => {
+      dispatch(postContact(newContact)).then(() => {
         // await dispatch(fetchContactList());
         navigation.goBack();
       });
@@ -67,23 +67,30 @@ const EditContactScreen: FC<IMainNavigatorPropTypes<'EditContactScreen'>> = ({
           label="First Name"
           value={firstName}
           onTextChange={t => setFirstName(t)}
+          testID="input-name-first"
         />
         <SimpleTextInput
           label="Last Name"
           value={lastName}
           onTextChange={t => setLastName(t)}
+          testID="input-name-last"
         />
         <SimpleTextInput
           label="Age"
           value={age.toString()}
-          onTextChange={t => setAge(parseInt(t))}
+          onTextChange={t => setAge(parseInt(t, 10))}
+          testID="input-age"
         />
         <SimpleTextInput
           label="Photo URL"
           value={photo}
           onTextChange={t => setPhoto(t)}
+          testID="input-photo"
         />
-        <SimpleImagePicker onImageSelected={image => setPhoto(image)} />
+        <SimpleImagePicker
+          onImageSelected={image => setPhoto(image)}
+          testID="image-picker"
+        />
       </View>
 
       <View>
@@ -100,6 +107,7 @@ const EditContactScreen: FC<IMainNavigatorPropTypes<'EditContactScreen'>> = ({
         <View style={{flexDirection: 'row', marginTop: 8}}>
           <View style={{flex: 1}}>
             <SimpleButton
+              testID="button-back"
               label={confirm ? 'cancel' : 'back'}
               onPress={onBackPressHandler}
               style={{borderWidth: 0, color: 'black'}}
@@ -107,6 +115,7 @@ const EditContactScreen: FC<IMainNavigatorPropTypes<'EditContactScreen'>> = ({
           </View>
           <View style={{flex: 1}}>
             <SimpleButton
+              testID="button-right"
               label={confirm ? 'confirm' : isCreate ? 'create' : 'submit'}
               onPress={onSubmitPressHandler}
               style={{

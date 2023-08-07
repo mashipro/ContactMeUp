@@ -1,6 +1,4 @@
-import createEndpointArray from './APIUtils';
-
-export const EndpointPool = createEndpointArray(
+export default [
   {
     endpoint: 'getContact',
     url: '/contact',
@@ -26,6 +24,4 @@ export const EndpointPool = createEndpointArray(
     url: '/contact/',
     method: 'delete',
   },
-);
-
-// console.log('EndpointPool', EndpointPool);
+] as const;

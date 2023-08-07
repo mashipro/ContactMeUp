@@ -5,17 +5,20 @@ type ISimpleTextInputProp = {
   onTextChange: (str: string) => void;
   value: string;
   label: string;
+  testID?: string;
 };
 const SimpleTextInput: FC<ISimpleTextInputProp> = ({
   onTextChange,
   value,
   label,
+  testID,
 }) => {
   return (
     <View style={styles.Base}>
       <Text>{label}</Text>
       <View style={{padding: 8, borderWidth: 1}}>
         <TextInput
+          testID={testID}
           style={styles.Normalize}
           value={value}
           placeholder={label}

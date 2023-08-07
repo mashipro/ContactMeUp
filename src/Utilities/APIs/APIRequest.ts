@@ -1,4 +1,4 @@
-import axios, {AxiosError, AxiosResponse} from 'axios';
+import axios, {AxiosError} from 'axios';
 import GlobalValue from '../GlobalValue';
 import {Endpoint, getEndpoint} from './APIUtils';
 

@@ -13,8 +13,12 @@ const imageSize = Dimensions.get('window').width / 3;
 
 type ISimpleImagePickerProp = {
   onImageSelected: (image: string) => void;
+  testID?: string;
 };
-const SimpleImagePicker: FC<ISimpleImagePickerProp> = ({onImageSelected}) => {
+const SimpleImagePicker: FC<ISimpleImagePickerProp> = ({
+  onImageSelected,
+  testID,
+}) => {
   const [selectedImage, setSelectedImage] = useState('');
   const onImageSelect = (item: string) => {
     setSelectedImage(item);
@@ -22,13 +26,16 @@ const SimpleImagePicker: FC<ISimpleImagePickerProp> = ({onImageSelected}) => {
   };
 
   return (
-    <View style={{flex: 1}}>
+    <View style={{flex: 1}} testID={testID}>
       <FlatList
+        testID={`${testID}-container`}
         data={ImageUrlPool}
         keyExtractor={(item, index) => index.toString()}
         numColumns={3}
-        renderItem={({item}) => (
-          <TouchableOpacity onPress={() => onImageSelect(item)}>
+        renderItem={({item, index}) => (
+          <TouchableOpacity
+            testID={`${testID}-image-${index}`}
+            onPress={() => onImageSelect(item)}>
             <Image
               style={[
                 styles.ImageDefault,
