@@ -8,6 +8,10 @@ import SplashScreen from '../Screens/SplashScreen';
 import ContactListScreen from '../Screens/ContactListScreen';
 import ContactDetailScreen from '../Screens/ContactDetailScreen';
 import EditContactScreen from '../Screens/EditContactScreen';
+import CounterScreen from '../Screens/Posts/CounterScreen';
+import PostDetailScreen from '../Screens/Posts/PostDetailScreen';
+import PostsScreen from '../Screens/Posts/PostsScreen';
+import SceneSelectScreen from '../Screens/SceneSelectScreen';
 
 const Stack = createNativeStackNavigator<IMainNavigator>();
 
@@ -24,17 +28,31 @@ export default function MainNavigationRoutes() {
             options={{headerShown: false}}
           />
           <Stack.Screen
-            name="ContactListScreen"
-            component={ContactListScreen}
+            name="SceneSelectScreen"
+            component={SceneSelectScreen}
           />
-          <Stack.Screen
-            name="ContactDetailScreen"
-            component={ContactDetailScreen}
-          />
-          <Stack.Group screenOptions={{presentation: 'modal'}}>
+          <Stack.Group>
             <Stack.Screen
-              name="EditContactScreen"
-              component={EditContactScreen}
+              name="ContactListScreen"
+              component={ContactListScreen}
+            />
+            <Stack.Screen
+              name="ContactDetailScreen"
+              component={ContactDetailScreen}
+            />
+            <Stack.Group screenOptions={{presentation: 'modal'}}>
+              <Stack.Screen
+                name="EditContactScreen"
+                component={EditContactScreen}
+              />
+            </Stack.Group>
+          </Stack.Group>
+          <Stack.Group>
+            <Stack.Screen name="CounterScreen" component={CounterScreen} />
+            <Stack.Screen name="PostsScreen" component={PostsScreen} />
+            <Stack.Screen
+              name="PostDetailScreen"
+              component={PostDetailScreen}
             />
           </Stack.Group>
         </Stack.Navigator>

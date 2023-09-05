@@ -8,7 +8,7 @@ const SplashScreen: FC<IMainNavigatorPropTypes<'SplashScreen'>> = ({
   useEffect(() => {
     setTimeout(() => {
       // console.log('timeout');
-      navigation.replace('ContactListScreen');
+      navigation.replace('SceneSelectScreen');
     }, 1000);
   }, []);
 

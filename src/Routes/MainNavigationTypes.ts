@@ -8,6 +8,10 @@ export type IMainNavigator = {
     contactDetail: IContact;
   };
   EditContactScreen: undefined | {contactDetail: IContact};
+  SceneSelectScreen: undefined;
+  CounterScreen: undefined;
+  PostsScreen: undefined;
+  PostDetailScreen: undefined;
 };
 
 export type IMainNavigatorPropTypes<T extends keyof IMainNavigator> =
