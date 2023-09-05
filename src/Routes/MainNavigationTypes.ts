@@ -1,5 +1,5 @@
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
-import {IContact} from '../Types/GlobalTypes';
+import {IContact, IPost} from '../Types/GlobalTypes';
 
 export type IMainNavigator = {
   SplashScreen: undefined;
@@ -11,7 +11,7 @@ export type IMainNavigator = {
   SceneSelectScreen: undefined;
   CounterScreen: undefined;
   PostsScreen: undefined;
-  PostDetailScreen: undefined;
+  PostDetailScreen: IPost;
 };
 
 export type IMainNavigatorPropTypes<T extends keyof IMainNavigator> =

@@ -15,6 +15,7 @@ export type EndpointTypes = {
   method: EndpointMethodType;
   payload?: any;
   params?: any;
+  base?: number | string;
 };
 
 export type Endpoint = (typeof EndpointPool)[number]['endpoint'];

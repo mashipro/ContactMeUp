@@ -1,15 +1,16 @@
 import axios, {AxiosError} from 'axios';
-import GlobalValue from '../GlobalValue';
 import {Endpoint, getEndpoint} from './APIUtils';
+import {BaseURLPools} from './EndpointPool';
 
 const APICall = async (endpoint: Endpoint, params?: any, payload?: any) => {
-  axios.defaults.baseURL = GlobalValue.BaseURL;
+  // axios.defaults.baseURL = GlobalValue.BaseURL;
 
   console.log('new Api call with detail:', {endpoint, params, payload});
 
   const selectEndpoint = getEndpoint(endpoint)!;
 
   return await axios({
+    baseURL: BaseURLPools[selectEndpoint.base],
     method: selectEndpoint.method,
     url:
       params === undefined
