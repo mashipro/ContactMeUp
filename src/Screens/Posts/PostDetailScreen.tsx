@@ -37,7 +37,7 @@ const PostDetailScreen = (
         <Text style={styles.BodyText}>{passedPost.body}</Text>
       </ScrollView>
       <SafeAreaView style={{position: 'absolute', top: 0, left: 0}}>
-        <View style={{flexDirection: 'row'}}>
+        <View style={{flexDirection: 'row', padding: 8}}>
           <SimpleButton
             testID="back-button"
             label="back"
