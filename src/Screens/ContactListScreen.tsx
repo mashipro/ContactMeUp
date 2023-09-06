@@ -36,8 +36,20 @@ const ContactListScreen: FC<IMainNavigatorPropTypes<'ContactListScreen'>> = ({
     navigation.navigate('EditContactScreen');
   };
 
+  const onBackHandler = () => {
+    navigation.goBack();
+  };
+
   return (
     <SafeAreaView style={styles.SafeArea}>
+      <View style={{flexDirection: 'row'}}>
+        <SimpleButton
+          testID="back-button"
+          label="back"
+          onPress={onBackHandler}
+          style={styles.Button}
+        />
+      </View>
       <View style={styles.Base}>
         <Text testID="header-title" style={styles.Text}>
           My Contact
