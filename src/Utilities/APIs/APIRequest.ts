@@ -25,11 +25,10 @@ const APICall = async (endpoint: Endpoint, params?: any, payload?: any) => {
       return result.data;
     })
     .catch((error: AxiosError) => {
-      console.error('axios error', error);
-      Toast.show({
-        type: 'error',
-        text1: 'Error in fetching data',
-        text2: 'Please try again later',
+      console.warn('request error...', {
+        code: error.code,
+        message: error.message,
+        detail: error,
       });
       throw error;
     });

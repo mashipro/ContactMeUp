@@ -1,12 +1,5 @@
 import React, {useCallback, useEffect, useState} from 'react';
-import {
-  FlatList,
-  FlatListProps,
-  ListRenderItem,
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
+import {FlatList, StyleSheet, Text, View} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 
 import {IMainNavigatorPropTypes} from '../../Routes/MainNavigationTypes';
@@ -33,9 +26,7 @@ const PostsScreen = ({navigation}: IMainNavigatorPropTypes<'PostsScreen'>) => {
 
   useEffect(() => {
     if (posts.postList.length > 0) return;
-    dispatch(fetchPostsList()).then((res: any) => {
-      console.log('res?', res);
-    });
+    dispatch(fetchPostsList());
   }, []);
 
   useEffect(() => {

@@ -4,11 +4,19 @@ import {ActionPrefix} from '../../Utilities/GlobalValue';
 import APICall from '../../Utilities/APIs/APIRequest';
 import {IPostState} from '../Reducers/PostsReducer';
 import {getRandomUrl} from '../../Utilities/ImageUrlPool';
+import {Toast} from 'react-native-toast-message/lib/src/Toast';
 
 export const fetchPostsList = createAsyncThunk(
   ActionPrefix.GET_POSTS,
   async (_, {rejectWithValue}) => {
-    const result = await APICall('getPosts');
+    const result = await APICall('getPosts').catch(err => {
+      Toast.show({
+        type: 'error',
+        text1: 'Error in fetching posts data',
+        text2: 'Please try again later or contact administrator',
+      });
+      throw err;
+    });
     result.map((post: IPost) => (post.image = getRandomUrl()));
 
     return result;
