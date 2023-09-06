@@ -27,7 +27,7 @@ describe('Splash Screen Test Suite', () => {
   it('should trigger navigation', async () => {
     render(<SplashScreen navigation={navigation} route={route} />);
     jest.runAllTimers();
-    expect(navigation.replace).toBeCalledWith('ContactListScreen');
+    expect(navigation.replace).toBeCalledWith('SceneSelectScreen');
     expect(navigation.replace).toBeCalledTimes(1);
   });
 });
