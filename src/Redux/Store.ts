@@ -10,6 +10,7 @@ const createObserver = require('flipper-redux-observer').default;
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
+  blacklist: ['posts'],
 };
 
 const rootReducer = reducer;

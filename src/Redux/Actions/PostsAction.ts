@@ -7,62 +7,13 @@ import {getRandomUrl} from '../../Utilities/ImageUrlPool';
 
 export const fetchPostsList = createAsyncThunk(
   ActionPrefix.GET_POSTS,
-  async () => {
+  async (_, {rejectWithValue}) => {
     const result = await APICall('getPosts');
     result.map((post: IPost) => (post.image = getRandomUrl()));
-    // console.log('fetching posts list', result);
 
     return result;
   },
 );
-
-// export const fetchContactByID = createAsyncThunk(
-//   ActionPrefix.GET_CONTACT_BY_ID,
-//   async (id: string) => {
-//     const result = await APICall('getContactByID', {id});
-//     console.log('fetchContactByID', result);
-
-//     return result;
-//   },
-// );
-
-// export const postContact = createAsyncThunk(
-//   ActionPrefix.CREATE_CONTACT,
-//   async (contact: IContact) => {
-//     const result = await APICall('postContact', undefined, contact);
-//     console.log('postContact', result);
-
-//     return result;
-//   },
-// );
-
-// type IEditContactPayload = {
-//   id: string;
-//   contact: IContact;
-// };
-// export const editContact = createAsyncThunk(
-//   ActionPrefix.EDIT_CONTACT,
-//   async (payload: IEditContactPayload, thunk) => {
-//     console.log('postContact payload', payload);
-//     const result = await APICall(
-//       'editContactByID',
-//       {id: payload.id},
-//       payload.contact,
-//     );
-//     console.log('postContact', result);
-//     thunk.dispatch(fetchContactByID(payload.id));
-
-//     return result;
-//   },
-// );
-
-// export const deleteContact = createAsyncThunk(
-//   ActionPrefix.DELETE_CONTACT,
-//   async (id: string) => {
-//     const result = APICall('deleteContactByID', {id});
-//     return result;
-//   },
-// );
 
 const PostsActionReducerBuilder = (
   builder: ActionReducerMapBuilder<IPostState>,
@@ -73,54 +24,15 @@ const PostsActionReducerBuilder = (
       state.error = null;
     })
     .addCase(fetchPostsList.rejected, (state, action: any) => {
+      console.log('payload', action);
       state.isLoading = false;
-      state.error = {isError: true, message: action.payload.message};
+      state.error = {isError: true, message: action.error.message};
     })
     .addCase(fetchPostsList.fulfilled, (state, action) => {
       state.isLoading = false;
       state.error = null;
       state.postList = action.payload;
     });
-  // .addCase(fetchContactList.pending, state => {
-  //   state.isLoading = true;
-  // })
-  // .addCase(fetchContactList.fulfilled, (state, action) => {
-  //   state.isLoading = false;
-  //   state.contactList = action.payload.data;
-  //   state.error = {isError: false, message: action.payload.message};
-  // })
-  // .addCase(fetchContactList.rejected, (state, action: any) => {
-  //   state.isLoading = false;
-  //   state.error = {isError: true, message: action.payload.message};
-  // })
-  // .addCase(fetchContactByID.pending, state => {
-  //   state.isLoading = true;
-  // })
-  // .addCase(fetchContactByID.rejected, state => {
-  //   state.isLoading = false;
-  // })
-  // .addCase(fetchContactByID.fulfilled, (state, action) => {
-  //   state.isLoading = false;
-  //   state.selectedContact = action.payload.data;
-  // })
-  // .addCase(postContact.pending, state => {
-  //   state.isLoading = true;
-  // })
-  // .addCase(postContact.rejected, state => {
-  //   state.isLoading = false;
-  // })
-  // .addCase(postContact.fulfilled, state => {
-  //   state.isLoading = false;
-  // })
-  // .addCase(deleteContact.pending, state => {
-  //   state.isLoading = true;
-  // })
-  // .addCase(deleteContact.rejected, state => {
-  //   state.isLoading = false;
-  // })
-  // .addCase(deleteContact.fulfilled, state => {
-  //   state.isLoading = false;
-  // });
 };
 
 export default PostsActionReducerBuilder;

@@ -33,7 +33,9 @@ const PostsScreen = ({navigation}: IMainNavigatorPropTypes<'PostsScreen'>) => {
 
   useEffect(() => {
     if (posts.postList.length > 0) return;
-    dispatch(fetchPostsList());
+    dispatch(fetchPostsList()).then((res: any) => {
+      console.log('res?', res);
+    });
   }, []);
 
   useEffect(() => {
@@ -46,7 +48,7 @@ const PostsScreen = ({navigation}: IMainNavigatorPropTypes<'PostsScreen'>) => {
       searchForPosts(search);
     }, searchDelay);
     return () => clearTimeout(timer);
-  }, [search]);
+  }, [search, posts]);
 
   const searchForPosts = (title: string) => {
     const allPost = posts.postList;

@@ -1,6 +1,7 @@
 import axios, {AxiosError} from 'axios';
 import {Endpoint, getEndpoint} from './APIUtils';
 import {BaseURLPools} from './EndpointPool';
+import {Toast} from 'react-native-toast-message/lib/src/Toast';
 
 const APICall = async (endpoint: Endpoint, params?: any, payload?: any) => {
   // axios.defaults.baseURL = GlobalValue.BaseURL;
@@ -20,11 +21,17 @@ const APICall = async (endpoint: Endpoint, params?: any, payload?: any) => {
     // params: params,
   })
     .then(result => {
+      console.log('request success...');
       return result.data;
     })
     .catch((error: AxiosError) => {
       console.error('axios error', error);
-      return error;
+      Toast.show({
+        type: 'error',
+        text1: 'Error in fetching data',
+        text2: 'Please try again later',
+      });
+      throw error;
     });
 };
 

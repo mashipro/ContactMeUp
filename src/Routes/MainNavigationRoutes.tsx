@@ -12,6 +12,7 @@ import CounterScreen from '../Screens/Posts/CounterScreen';
 import PostDetailScreen from '../Screens/Posts/PostDetailScreen';
 import PostsScreen from '../Screens/Posts/PostsScreen';
 import SceneSelectScreen from '../Screens/SceneSelectScreen';
+import {Toast} from 'react-native-toast-message/lib/src/Toast';
 
 const Stack = createNativeStackNavigator<IMainNavigator>();
 
@@ -57,6 +58,7 @@ export default function MainNavigationRoutes() {
           </Stack.Group>
         </Stack.Navigator>
       </NavigationContainer>
+      <Toast />
     </SafeAreaProvider>
   );
 }

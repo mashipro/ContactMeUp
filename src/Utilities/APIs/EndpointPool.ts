@@ -36,7 +36,7 @@ export default [
   },
   {
     endpoint: 'getPosts',
-    url: '/posts',
+    url: '/posts-',
     method: 'get',
     base: 1,
   },
